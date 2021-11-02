@@ -1,0 +1,55 @@
+{% extends 'registration/base.html' %} {% block title %}{% block title-meta %}
+    لیست مقالات
+{% endblock %} {% endblock %}
+{% block main %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+
+{#            <div class="card-header">#}
+{#                <h3 class="card-title">Responsive Hover Table</h3>#}
+{#                <div class="card-tools">#}
+{#                    <div class="input-group input-group-sm" style="width: 150px;"><input type="text" name="table_search" class="form-control float-right" placeholder="Search">#}
+{#                        <div class="input-group-append"><button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button></div></div></div></div>#}
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center">عنوان مقاله</th>
+                            <th style="text-align:center">تصویر</th>
+                            <th style="text-align:center">دسته بندی</th>
+                            <th style="text-align:center">نویسنده</th>
+                            <th style="text-align:center">خلاصه</th>
+                            <th style="text-align:center">زمان انتشار</th>
+                            <th style="text-align:center">وضعیت</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in object_list %}
+                        <tr>
+                            <td style="text-align:center">{{ article.title }}</td>
+                            <td ><img src="{{ article.thumbnail.url }}" width="120"></td>
+                            <td style="text-align:center">{{ article.category_to_str }}</td>
+                            <td style="text-align:center">{{ article.author.get_full_name}}</td>
+                            <td style="text-align:center">{{ article.description|truncatewords:30 }}</td>
+                            <td style="text-align:center">{{ article.jpublish }}</td>
+                            <td >
+                                {% if article.status == 'p' %}
+                                    <span class = "badge badge-success ">منتشر شده</span>
+                                    <a target="_blank" class = "badge badge-primary" href= "{% url 'detail'  article.slug %}">نمایش مقاله</a>
+                                {% else %}
+                                    <span class = "badge badge-danger ">پیش نویس</span>
+
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+
+    {% endblock %}

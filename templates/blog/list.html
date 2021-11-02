@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %} {% block main %} {% load static %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('{% static "assets/img/home-bg.jpg " %}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>اخبار روز ایران و جهان</h1>
+                    <span class="subheading">برگرفته از سایت فارس نیوز</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--Meain Content -->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            {% block header %}{% endblock %} {% for article in object_list %}
+
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a href="{% url 'detail' article.slug %}">
+                    <h2 class="post-title">{{ article.title }}</h2>
+                    <h3 class="post-subtitle">{{ article.description|truncatechars:0 }}</h3>
+                </a>
+                <p class="post-meta">نوشته شده توسط
+              <a href="{% url 'author' article.author %}">{{article.author.get_full_name}}</a>
+                    {{ article.jpublish }}</p>
+
+                <div>
+                    {% for cat in article.category.active %}
+                    <a href="{% url 'category' cat.slug %}">#{{ cat.title }}</a> {% endfor %}
+                </div>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" /> {% endfor %}
+            <!-- Pager-->
+            {% if page_obj.has_previous %}
+            <div class="d-flex1 justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% block previous_page_url %}{% endblock %}">پست
+                        های جدید &rarr;</a></div>
+            {% endif %} {% if page_obj.has_next %}
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% block next_page_url %}{% endblock %}">پست
+                        های قدیمی&larr;</a></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
