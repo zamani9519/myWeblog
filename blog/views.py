@@ -41,8 +41,6 @@ class CategoryList(ListView):
         context = super().get_context_data(**kwargs)
         context['category'] = category
         return context
-
-
 # *************************************************************
 class AuthorList(ListView):
     paginate_by = 5

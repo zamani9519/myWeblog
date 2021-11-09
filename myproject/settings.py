@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 LOGIN_REDIRECT_URL = "home"
 # با استفاده از این خط کد میتوانیم به سیستم بفهمانیم که بعد از لاگین کردن به کدام صفحه حرکت کن
 LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'
 
 
 # با استفاده ازاین خط کد میتوانیم به سیستم بفهمانیم که اگر از لاگین ،لاگ اوت کردیم دیگر با رفرش دکردن صفحه ی home  ما را به صفحه ی لاگین باز گرداند
@@ -34,6 +35,7 @@ SECRET_KEY = 'django-insecure-i7r9a*01s$c&2omp2dt+s7@_hq6o0k2zng57$z5jc-u(#m+-1j
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# [127.0.0.1:8000']
 
 # Application definition
 
