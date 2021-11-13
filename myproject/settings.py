@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 LOGIN_REDIRECT_URL = "home"
 # با استفاده از این خط کد میتوانیم به سیستم بفهمانیم که بعد از لاگین کردن به کدام صفحه حرکت کن
 LOGIN_URL = 'login'
+# اگر بخواهیم بعد از لاگ اوت کردن وارد لاگین شود از این قطعه کد استفاده میکنیم
 LOGOUT_REDIRECT_URL = 'login'
 
 

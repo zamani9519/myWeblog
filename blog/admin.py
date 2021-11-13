@@ -46,7 +46,7 @@ admin.site.register(Category, CategoryAdmin)
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = (
-    'title', 'thumbnail_tag', 'slug', 'author', 'description', 'jpublish', 'status', 'category_to_str')  # آوردن منو
+    'title', 'thumbnail_tag', 'slug', 'author', 'description', 'jpublish','is_special' ,'status', 'category_to_str')  # آوردن منو
     list_filter = ('publish', 'status','author')  # گذاشتن سرچ
     search_fields = ('title', 'description')  # گذاشتن فیلتر
     prepopulated_fields = {

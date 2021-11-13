@@ -13,3 +13,4 @@ def category_navbar():
     return{
         "category":Category.objects.filter(status=True)
     }
+

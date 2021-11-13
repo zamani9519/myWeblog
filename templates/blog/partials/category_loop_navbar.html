@@ -1,7 +1,7 @@
 <ul class="navbar-nav ms-auto py-4 py-lg-0">
     {% for cat in cat.children.active %}
         <li class="nav-item">
-            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'category' cat.slug %}">{{ cat.title }}</a>
+            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'category_list' cat.slug %}">{{ cat.title }}</a>
             {% if cat.children.active %}
                 {% include 'blog/partials/category_loop_navbar.html' %}
             {% endif %}

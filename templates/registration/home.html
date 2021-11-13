@@ -4,7 +4,8 @@
 {% block main %}
     <div class="row">
         <div class="col-12">
-            <div class="card">
+            {% if object_list %}
+                <div class="card">
 
                 {#            <div class="card-header">#}
                 {#                <h3 class="card-title">Responsive Hover Table</h3>#}
@@ -21,6 +22,7 @@
                             <th style="text-align:center">نویسنده</th>
                             <th style="text-align:center">خلاصه</th>
                             <th style="text-align:center">زمان انتشار</th>
+                            <th style="text-align:center">مقاله ویژه</th>
                             <th style="text-align:center">وضعیت</th>
                         </tr>
                         </thead>
@@ -28,7 +30,7 @@
                         {% for article in object_list %}
                             <tr>
                                 <td>
-                                    {% if article.status == 'd' or user.is_superuser %}
+                                    {% if article.status in 'bd'|make_list or user.is_superuser %}
                                         <a href="{% url 'article-update' article.pk %}">{{ article.title }}</a>
                                     {% else %}
                                         {{ article.title }}
@@ -39,16 +41,37 @@
                                 <td style="text-align:center">{{ article.author.get_full_name }}</td>
                                 <td style="text-align:center">{{ article.description|striptags|safe |truncatewords:30 }}</td>
                                 <td style="text-align:center">{{ article.jpublish }}</td>
+                                <td style="text-align:center">
+                                    {% if article.is_special %}
+                                        <i class="fa fa-check-circle" style="color:green"></i>
+                                    {% else %}
+                                        <i class="fa fa-minus-circle" style="color:red"></i>
+                                    {% endif %}
+                                </td>
                                 <td>
                                     {% if article.status == 'p' %}
-                                        <span class="badge badge-success ">منتشر شده</span>
+                                        <span class="badge badge-success">منتشرشده</span>
                                         <a target="_blank" class="badge badge-primary"
-                                           href="{% url 'detail'  article.slug %}">نمایش مقاله</a>
+                                           href="{% url 'detail' article.slug %}">نمایش</a>
+                                    {% elif article.status == 'i' %}
+                                        <span class="badge" style="background-color: #32f4df;">درحال بررسی</span>
+                                        {% if user.is_superuser %}
+                                            <a target="_blank" class="badge badge-secondary"
+                                               href="{% url 'preview' article.pk %}">پیشنمایش</a>
+                                        {% endif %}
                                     {% else %}
-                                        <span class="badge badge-danger ">پیش نویس</span>
+                                        {% if article.status == 'd' %}
+                                            <span class="badge badge-danger">پیش‌نویس</span>
+                                        {% else %}
+                                            <span class="badge badge-warning">برگشت داده شده</span>
+                                        {% endif %}
+                                        <a target="_blank" class="badge badge-secondary"
+                                           href="{% url 'preview' article.pk %}">پیشنمایش</a>
                                     {% endif %}
+
                                     {% if user.is_superuser %}
-                                          <a class = "badge text-danger" href = "{% url 'article-delete' article.pk %}">حذف</a>
+                                        <a class="badge text-danger"
+                                           href="{% url 'article-delete' article.pk %}">حذف</a>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -56,7 +79,10 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.card-body -->
+            {% else %}
+                <h3>محتوایی برای نمایش وجود ندارد</h3>
+            {% endif %}
+            <!-- /.card-body -->
             </div>
             <!-- /.card -->
         </div>

@@ -4,7 +4,7 @@ from django.views.generic.list import ListView
 from .models import Article, Category
 from django.core.paginator import Paginator
 from django.views.generic.detail import DetailView
-
+from account.mixins import AuthorAccessMixin
 
 # from django.http import JsonResponse
 
@@ -57,6 +57,13 @@ class AuthorList(ListView):
         context['author'] = author
         return context
 # *************************************************************
+class ArticlePreview(AuthorAccessMixin,DetailView):
+    template_name = "blog/detail.html"
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Article, pk=pk)
+# *************************************************************
+
 # def home(request, page=1):
 #     articles_list = Article.objects.published()
 #     paginator = Paginator(articles_list, 6)

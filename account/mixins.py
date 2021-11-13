@@ -6,9 +6,9 @@ class FieldMixin():
         if request.user.is_superuser:
             self.fields = [
                 "author","title","slug","category","description","thumbnail",
-                "publish","status"]
+                "publish","is_special","status"]
         elif request.user.is_author:
-            self.fields = ["title","slug","category","description",
+            self.fields = ["title","slug","category","is_special","description",
                 "thumbnail","publish"]
         else:
             raise Http404("شما نمیتوانید این صفحه را ببینید!")
@@ -26,7 +26,7 @@ class FormValidMixin():
 class AuthorAccessMixin():
     def dispatch(self, request,pk, *args, **kwargs):
         article = get_object_or_404(Article,pk=pk)
-        if article.author == request.user and article.status =='d' or\
+        if article.author == request.user and article.status in ['b','d'] or\
          request.user.is_superuser :
             return super().dispatch(request, *args, **kwargs)
         else:
