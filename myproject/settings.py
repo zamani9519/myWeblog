@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os.path
 from pathlib import Path
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import account.apps
@@ -30,7 +32,8 @@ LOGOUT_REDIRECT_URL = 'login'
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i7r9a*01s$c&2omp2dt+s7@_hq6o0k2zng57$z5jc-u(#m+-1j'
+SECRET_KEY = config('SECRET_KEY')
+#  'django-insecure-i7r9a*01s$c&2omp2dt+s7@_hq6o0k2zng57$z5jc-u(#m+-1j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -139,9 +142,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # BASE_DIR / "media"  # os.path.join(BASE_DIR, 'media')
 # o BASE_DIR / "media"
 # Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+# https://docs.djangoproject.com/en/3.2/ref/s ettings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # اگر غالب استفاده شده بوتسرترپ پنج بود تغییر میدیم
 AUTH_USER_MODEL = 'account.User'
+
+# ارسال ایمیل در کنسول
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_USE_TLS = True
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')

@@ -1,10 +1,20 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView,PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .mixins import FieldMixin,FormValidMixin,AuthorAccessMixin,SuperUserAccessMixin,AuthorsAccessMixin
-from django.views.generic import ListView , CreateView,UpdateView,DeleteView
+from .mixins import (
+    FieldMixin,
+    FormValidMixin,
+    AuthorAccessMixin,
+    SuperUserAccessMixin,
+    AuthorsAccessMixin)
+from django.views.generic import (
+    ListView ,
+    CreateView,
+    UpdateView,
+    DeleteView ,
+ )
 from blog.models import Article
 from django.contrib.auth import logout
 from .models import User
@@ -69,6 +79,8 @@ class Login(LoginView):
 
 
 
+# class PasswordChange(PasswordChangeView):
+#     success_url = reverse_lazy("password_change_done")
 # @login_required
 # def home(request):
 #     return render(request,'registration/home.html')
