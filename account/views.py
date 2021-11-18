@@ -56,7 +56,7 @@ class Profile(UpdateView):
     form_class = ProfileForm
     success_url = reverse_lazy("profile")
     def get_object(self):
-        return User.objects.get(pk=2)
+        return User.objects.get(pk = self.request.user.pk)
     def get_form_kwargs(self):
         kwargs = super(Profile, self).get_form_kwargs()
         kwargs.update({
@@ -74,15 +74,12 @@ class Login(LoginView):
 
 
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
 from .forms import SignupForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 
 class Register(CreateView):
