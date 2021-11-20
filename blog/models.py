@@ -4,7 +4,8 @@ from extensions.utils import jalali_converter
 from django.utils.html import format_html
 from account  .models import User
 from django.urls import reverse
-
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 # my managers
 class ArticleManager(models.Manager):
@@ -56,7 +57,7 @@ class Article(models.Model):
     updated = models.DateTimeField(auto_now=True)
     is_special = models.BooleanField(default=False, verbose_name="مقاله ویژه")
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")
-
+    comments = GenericRelation(Comment)
     class Meta:
         verbose_name = "مقاله"  # هرجا که بخواهد از اسم بدون جمع استفاده کند از این استفاده میکند
         verbose_name_plural = "مقالات"  # هرجا که بخواهد از جمع استفاده کند از این استفاده میکند;داستان s بعد از مقاله

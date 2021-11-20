@@ -7,7 +7,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True,verbose_name='آدرس ایمیل')
     is_author = models.BooleanField(default=False,verbose_name="وضعیت نویسندگی")
     special_user = models.DateTimeField(default=timezone.now, verbose_name = "کاربر ویژه تا ")
-
+    first_name = models.CharField(max_length=20, verbose_name="نام")
+    last_name = models.CharField(max_length=20, verbose_name="نام خانوادگی")
     def is_special_user(self):
         if self.special_user >timezone.now():
             return True

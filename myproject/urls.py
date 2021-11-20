@@ -27,6 +27,7 @@ urlpatterns = [
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,39})/$',activate, name='activate'),
     path('account/', include('account.urls')),
     path('admin/', admin.site.urls),
+    path('comment/', include('comment.urls')),
 ]
 from django.conf import settings
 from django.conf.urls.static import static

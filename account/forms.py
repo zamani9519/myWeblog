@@ -23,4 +23,9 @@ class SignupForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username','first_name','last_name', 'email', 'password1', 'password2')
+        widgets = {
+            'first_name': forms.TextInput(attrs={'data-content': 'لطفا فقط فارسی تایپ کنید','data-toggle':"popover", 'data-trigger':"hover"}),
+            'last_name': forms.TextInput(attrs={'data-content': 'لطفا فقط فارسی تایپ کنید','data-toggle':"popover", 'data-trigger':"hover"}),
+
+            }

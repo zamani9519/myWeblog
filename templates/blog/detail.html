@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 {% block custom-header %}
+{% load comment_tags %}
     {#    <link rel="stylesheet"type="text/css"href="styles.css">#}
     {#   زمانی که بخواهیم یک سی اس اس خاصی را داخل یک صفحه قرار بدیم از این متد استفاده میکنیم#}
 
@@ -41,6 +42,8 @@
                     {% else %}
                         {{ object.description|safe }}
                     {% endif %}
+                    {% render_comments object request %}
+                    {% include_bootstrap %}
                 </div>
             </div>
         </div>
