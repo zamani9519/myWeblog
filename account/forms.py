@@ -6,6 +6,7 @@ class ProfileForm(forms.ModelForm):
     def __init__(self,*args,**kwargs):
         user = kwargs.pop('user')
         super(ProfileForm,self).__init__(*args,**kwargs)
+        self.fields['username'].help_text = None
         if not user.is_superuser:
             self.fields['username'].disabled = True
             self.fields['email'].disabled = True
@@ -27,5 +28,4 @@ class SignupForm(UserCreationForm):
         widgets = {
             'first_name': forms.TextInput(attrs={'data-content': 'لطفا فقط فارسی تایپ کنید','data-toggle':"popover", 'data-trigger':"hover"}),
             'last_name': forms.TextInput(attrs={'data-content': 'لطفا فقط فارسی تایپ کنید','data-toggle':"popover", 'data-trigger':"hover"}),
-
             }

@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 {% block custom-header %}
 {% load comment_tags %}
+{% load ratings %}
     {#    <link rel="stylesheet"type="text/css"href="styles.css">#}
     {#   زمانی که بخواهیم یک سی اس اس خاصی را داخل یک صفحه قرار بدیم از این متد استفاده میکنیم#}
 
@@ -20,6 +21,12 @@
                         <span class="meta">
                                 <a href="#!">{{object.jpublish}}</a>
                         </span>
+                        <div>
+                            {% ratings object %}
+                        </div>
+                        <div>
+                          بازدید ها :    {{ object.hits.count }}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'django_gravatar',
-    'comment'
+    'comment',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'blog.middleware.SaveIPAddressMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -155,8 +157,20 @@ AUTH_USER_MODEL = 'account.User'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_USE_TLS = True
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+# اندازه ی ستاره ها
+STAR_RATINGS_STAR_HEIGHT = 16
+#  تعداد ستاره ها
+# STAR_RATINGS_RANGE  = 7
+# اجازه بدیم کسانی هم که در سایت لاگین نکرده اند هم رای بدن
+# STAR_RATINGS_ANONYMOUS = True
+# اجازه بدیم که رای خودش را تغییر بده
+# STAR_RATINGS_RERATE = False
+# اگر بخواهیم شکل را عوض کنیم
+# STAR_RATINGS_STAR_SPRITE=os.path.join(BASE_DIR, 'media'

@@ -105,4 +105,6 @@ header.masthead .site-heading h1 {
 .nav ul > li > ul > li > ul > li:hover > ul {
     display: block !important;
 }
-
+.row.gx-4.gx-lg-5.justify-content-center {
+    font-family: sahel !important;
+}

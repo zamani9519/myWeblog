@@ -235,3 +235,6 @@ input#search-input:focus::placeholder {
 .js-comment-content {
     font-family: Sahel !important;
 }
+.js-reply-link.btn.btn-link.ml-1 {
+    font-family: sahel !important;
+}
