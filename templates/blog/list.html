@@ -41,6 +41,9 @@
                             {% for cat in article.category.active %}
                                 <a href="{% url 'category' cat.slug %}">#{{ cat.title }}</a> {% endfor %}
                         </div>
+                        <div>
+                              بازدید ها :    {{ article.hits.count }}
+                        </div>
                     </div>
                     <!-- Divider-->
                     <hr class="my-4"/> {% endfor %}

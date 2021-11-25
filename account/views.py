@@ -118,6 +118,29 @@ def activate(request, uidb64, token):
 	else:
 		return HttpResponse('لینک فعال سازی منقضی شده است. <a href="/registration">دوباره امتحان کنید.</a>')
 
+
+# import io
+# from django.http import FileResponse
+# from reportlab.pdfgen import canvas
+#
+# def some_view(request):
+#     buffer = io.BytesIO()
+#     p = canvas.Canvas(buffer)
+#     p.drawString(100, 100, "Hello world.")
+#     p.showPage()
+#     p.save()
+#     buffer.seek(0)
+#     return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
+
+
+
+
+
+
+
+
+
+
 # def signup(request):
 #     if request.method == 'POST':
 #         form = SignupForm(request.POST)

@@ -1,6 +1,6 @@
 {% load static %}
 {% load base_tags %}
-<!DOCTYPE html>
+{#<!DOCTYPE html>#}
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -20,7 +20,7 @@
     <link href="{% static '/blog/css/styles.css' %}" rel="stylesheet"/>
     <link href="{% static '/blog/css/rtl.css' %}" rel="stylesheet"/>
     {#    #با اضافه کردن این فایل میتوانیم قالب خودمان را راست چین بکنیم#}
-{#    #start rating static file#}
+    {#    #start rating static file#}
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 </head>
@@ -37,6 +37,9 @@
         {% category_navbar %}
     </div>
 </nav>
+{% block header %}
+
+{% endblock %}
 
 <!-- Main Content-->
 {% block main %}

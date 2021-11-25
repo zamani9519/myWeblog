@@ -5,18 +5,30 @@ from .models import Article, Category
 from django.core.paginator import Paginator
 from django.views.generic.detail import DetailView
 from account.mixins import AuthorAccessMixin
-
+from django.db.models import Count ,Q
+from datetime import datetime,timedelta
 # from django.http import JsonResponse
 
 # *************************************************************
 class ArticleList(ListView):
     template_name = "blog/list.html"
     queryset = Article.objects.published()
-    paginate_by = 6
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        last_month = datetime.today() - timedelta(days=30)
+        context['popular_articles'] = Article.objects.published().annotate(
+            count=Count('hits',filter=Q(articlehit__created__gt = last_month))
+        ).order_by('-count','-publish')
+        return context
+
+#      برو بازدید هایی که ما در یک ماه اخیر استفاده کردیم بیار این به این معنا است که رپست های روز سی ام نوشتیم را میاورد پس نیاز به تغییرات دارد
+# Q(articlehit_created__year = 2021) | Q(articlehit_created__month = 12)
+# | این به معنی یا میباشد
+#& این به معنای و می باشد
 #     context_object_name = "articles"
     # model = Article
-
-
 # *************************************************************
 class ArticleDetail(DetailView):
     template_name = "blog/detail.html"
@@ -28,8 +40,8 @@ class ArticleDetail(DetailView):
         ip_address = self.request.user.ip_address
         if ip_address not in article.hits.all():
             article.hits.add(ip_address)
-        return article
 
+        return article
 # *************************************************************
 class CategoryList(ListView):
     template_name = "blog/category_list.html"

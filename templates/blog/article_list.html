@@ -1,11 +1,21 @@
 {% extends 'blog/list.html' %}
 
-{% block header %}{% endblock %}
+{% block header %}
+<div class="popular_articles">
+     <h2 class="h4">مقالات پر بازدید ما</h2>
+     <hr>
+     {% for a in popular_articles %}
+         <div>
+             <a href="{% url 'detail' a.slug %}">{{ a.title }}</a>
+         </div>
+     {% endfor %}
+</div>
+{% endblock %}
 
 {% block previous_page_url %}
-  {% url 'home_usr' page_obj.previous_page_number %}
+    {% url 'home_usr' page_obj.previous_page_number %}
 {% endblock %}
 
 {% block next_page_url %}
-  {% url 'home_usr' page_obj.next_page_number %}
+    {% url 'home_usr' page_obj.next_page_number %}
 {% endblock %}

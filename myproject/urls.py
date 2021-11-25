@@ -21,6 +21,7 @@ from account.views import Login,Register,activate
 
 urlpatterns = [
     path('', include('blog.urls')),
+    path('', include('rendertopdf.urls')),
     path('', include('django.contrib.auth.urls')),
     path('login/', Login.as_view(), name='login'),
     path('register/', Register.as_view(), name='register'),
