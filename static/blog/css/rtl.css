@@ -108,3 +108,16 @@ header.masthead .site-heading h1 {
 .row.gx-4.gx-lg-5.justify-content-center {
     font-family: sahel !important;
 }
+.popular_articles {
+    border: 1px solid #bfbfbf;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: -5px 5px #d5d5d5;
+}
+
+.h4 {
+    font-size:25px !important;
+    font-family: Sahel !important;
+
+}

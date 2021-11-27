@@ -1,0 +1,9 @@
+<div class="popular_articles" style="font-family: sahel " >
+     <h2 class="h4">مقالات پر بازدید ما</h2>
+     <hr>
+     {% for a in popular_articles %}
+         <div>
+             <a href="{% url 'detail' a.slug %}">{{ a.title }}</a>
+         </div>
+     {% endfor %}
+</div>

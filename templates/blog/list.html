@@ -1,5 +1,7 @@
-{% extends 'blog/base.html' %} {% block main %} {% load static %}
+{% extends 'blog/base.html' %} {% load static %}
 {% load ratings %}
+{% load base_tags %}
+{% block main %}
     <!-- Page Header-->
     <header class="masthead" style="background-image: url('{% static "/blog/assets/img/home-bg.jpg " %}')">
         <div class="container position-relative px-4 px-lg-5">
@@ -17,7 +19,9 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                {% block header %}{% endblock %}{% for article in object_list %}
+                {% block header %}{% endblock %}
+                {% popular_articles %}
+                {% for article in object_list %}
 
                     <!-- Post preview-->
                     <div class="post-preview">
@@ -25,7 +29,8 @@
                             <h2 class="post-title">
                                 {{ article.title }}
                                 {% if article.is_special %}
-                                    <span class = "badge badge-primary" style ="font-size: 14px; background-color: #da1717">(اشتراک ویژه)</span>
+                                    <span class="badge badge-primary"
+                                          style="font-size: 14px; background-color: #da1717">(اشتراک ویژه)</span>
                                 {% endif %}
                             </h2>
                             <div>
@@ -42,21 +47,26 @@
                                 <a href="{% url 'category' cat.slug %}">#{{ cat.title }}</a> {% endfor %}
                         </div>
                         <div>
-                              بازدید ها :    {{ article.hits.count }}
+                            بازدید ها : {{ article.hits.count }}
                         </div>
                     </div>
                     <!-- Divider-->
                     <hr class="my-4"/> {% endfor %}
                 <!-- Pager-->
-                {% if page_obj.has_previous %}
-                    <div class="d-flex1 justify-content-end mb-4"><a class="btn btn-primary text-uppercase"
-                                                                     href="{% block previous_page_url %}{% endblock %}">پست
-                        های جدید &rarr;</a></div>
-                {% endif %} {% if page_obj.has_next %}
-                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase"
-                                                                href="{% block next_page_url %}{% endblock %}">پست
-                    های قدیمی&larr;</a></div>
-            {% endif %}
+                {% if is_paginated %}
+                    <div class="clearfix pager-botton">
+                        {% if page_obj.has_previous %}
+                            <a class="btn btn-primary float-right ml-3"
+                               href="{% block previous_page_url %}{% endblock %}">پست
+                                های جدید &rarr;</a>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <a class="btn btn-primary float-right" href="{% block next_page_url %}{% endblock %}">پست
+                                های
+                                قدیمی &larr;</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
