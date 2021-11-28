@@ -1,27 +1,30 @@
 <div class="collapse navbar-collapse nav" id="navbarResponsive">
-  <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'home_usr' %}">خانه</a>
-    </li>
-    {% for cat in category %}
-      {% if cat.parent == None %}
+    <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'category' cat.slug %}">{{cat.title}}</a>
-          {% if cat.children.active %}
-            {% include 'blog/partials/category_loop_navbar.html' %}
-          {% endif %}
+            <a class="nav-link" href="{% url 'home_usr' %}">خانه</a>
         </li>
-      {% endif %}
-    {% endfor %}
-   <li class="nav-item">
-      <a class="nav-link" href="{% url 'home' %}">پنل مدیریت</a>
-   </li>
+        {% for cat in category %}
+            {% if cat.parent == None %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category' cat.slug %}">{{ cat.title }}</a>
+                    {% if cat.children.active %}
+                        {% include 'blog/partials/category_loop_navbar.html' %}
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">پنل مدیریت</a>
+        </li>
 
-   <li class="nav-item">
-      <a class="nav-link" href="{% url 'logout' %}">خروج</a>
-   </li>
-  </ul>
-
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">خروج</a>
+        </li>
+                <form class="form-inline mt-3" action="{% url 'search' %}">
+                    <input type="text" name="q" class="form-control" placeholder="متن جستجو">
+                    <button class="btn btn-success" style="padding:4px;border-redius:5px;margin-right:2px;margin-top: 5px">جستجو</button>
+                </form>
+    </ul>
 </div>
 {#        {% for cat in category %}#}
 {#            <ul class="navbar-nav ms-auto py-4 py-lg-0">#}

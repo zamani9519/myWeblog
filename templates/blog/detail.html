@@ -1,8 +1,8 @@
 {% extends 'blog/base.html' %}
 {% block custom-header %}
-{% load comment_tags %}
-{% load ratings %}
-{% load base_tags %}
+    {% load comment_tags %}
+    {% load ratings %}
+    {% load base_tags %}
     {#    <link rel="stylesheet"type="text/css"href="styles.css">#}
     {#   زمانی که بخواهیم یک سی اس اس خاصی را داخل یک صفحه قرار بدیم از این متد استفاده میکنیم#}
 
@@ -16,17 +16,17 @@
                     <div class="post-heading">
                         <h1>{{ object.title }}
                             {% if article.is_special %}
-                                 <span class = "badge badge-danger" style ="font-size: 14px; background-color: #ff0000">(**اشتراک ویژه**)</span>
+                                <span class="badge badge-danger" style="font-size: 14px; background-color: #ff0000">(**اشتراک ویژه**)</span>
                             {% endif %}
                         </h1>
                         <span class="meta">
-                                <a href="#!">{{object.jpublish}}</a>
+                                <a href="#!">{{ object.jpublish }}</a>
                         </span>
                         <div>
                             {% ratings object %}
                         </div>
                         <div>
-                          بازدید ها :    {{ object.hits.count }}
+                            بازدید ها : {{ object.hits.count }}
                         </div>
                     </div>
                 </div>
@@ -36,23 +36,39 @@
     <!-- Post Content-->
     <article class="mb-4">
         <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center ">
-                <div class="col-md-10 col-lg-8 col-xl-7  text-justify">
-                    {% popular_articles %}
-                    {% if object.is_special %}
-                        {% if user.is_authenticated and user.is_special_user or user == object.author or user.is_superuser %}
-                            {{ object.description|safe }}
-                        {% else %}
-                            {{ article.description|striptags|truncatechars:54 }}
+            <div class="row gx-4 gx-lg-5 justify-content-center  justify-content-around">
 
-                            <p class = "alert alert-warning">این مقاله ویژه است،برای خرید اشتراک <a class="alert-link" href = "#">کلیک کنید</a>
-                            </p>
+                <div class="col-md-10 col-lg-8 col-xl-7  text-justify ">
+
+                    <div>
+                        {% if object.is_special %}
+                            {% if user.is_authenticated and user.is_special_user or user == object.author or user.is_superuser %}
+                                {{ object.description|safe }}
+                            {% else %}
+                                {{ article.description|striptags|truncatechars:54 }}
+
+                                <p class="alert alert-warning">این مقاله ویژه است،برای خرید اشتراک <a class="alert-link"
+                                                                                                      href="#">کلیک
+                                    کنید</a>
+                                </p>
+                            {% endif %}
+                        {% else %}
+                            {{ object.description|safe }}
                         {% endif %}
-                    {% else %}
-                        {{ object.description|safe }}
-                    {% endif %}
-                    {% render_comments object request %}
-                    {% include_bootstrap %}
+                        {% render_comments object request %}
+                        {% include_bootstrap %}</div>
+
+
+                </div>
+
+
+                <div class="w-auto">
+
+                    <aside>
+                        {% popular_articles %}
+                        {% hot_articles %}
+                    </aside>
+
                 </div>
             </div>
         </div>

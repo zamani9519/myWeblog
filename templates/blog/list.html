@@ -17,12 +17,13 @@
     </header>
     <!--Meain Content -->
     <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="row gx-4 gx-lg-5 justify-content-center  justify-content-around">
+
+
             <div class="col-md-10 col-lg-8 col-xl-7">
                 {% block header %}{% endblock %}
-                {% popular_articles %}
-                {% for article in object_list %}
 
+                {% for article in object_list %}
                     <!-- Post preview-->
                     <div class="post-preview">
                         <a href="{% url 'detail' article.slug %}">
@@ -51,7 +52,10 @@
                         </div>
                     </div>
                     <!-- Divider-->
-                    <hr class="my-4"/> {% endfor %}
+                    {% empty %}
+                    <p>متاسفانه محتوایی برای نمایش وجود ندارد</p>
+
+                     {% endfor %}
                 <!-- Pager-->
                 {% if is_paginated %}
                     <div class="clearfix pager-botton">
@@ -67,6 +71,14 @@
                         {% endif %}
                     </div>
                 {% endif %}
+            </div>
+            <div class="w-auto">
+
+                <aside>
+                    {% popular_articles %}
+                    {% hot_articles %}
+                </aside>
+
             </div>
         </div>
     </div>

@@ -108,7 +108,18 @@ header.masthead .site-heading h1 {
 .row.gx-4.gx-lg-5.justify-content-center {
     font-family: sahel !important;
 }
+
+aside{
+    width: 240px;
+    /*position: absolute;*/
+    /*left: -240px;*/
+    /*flex-direction:column;*/
+    /*align-content: flex-end ;*/
+    /*order:-5;*/
+    /*justify-content: flex-end;*/
+}
 .popular_articles {
+
     border: 1px solid #bfbfbf;
     padding: 15px;
     border-radius: 5px;
