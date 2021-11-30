@@ -1,6 +1,5 @@
-.idea
+media
 db.sqlite3
 venv
-blog/migrations
-account/migrations
 .env
+.venv
